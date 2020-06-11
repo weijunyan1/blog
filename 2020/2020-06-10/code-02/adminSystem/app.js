@@ -9,6 +9,8 @@ const indexRouter = require('./routes/indexRouter');
 const userRouter = require('./routes/userRouter');
 // 1.5 引入关于文章的路由
 const articleRouter = require('./routes/articleRouter');
+const { param } = require('./routes/indexRouter');
+const { urlencoded } = require('express');
 
 // 2.设置包
 // 2.1 使用express方法创建Web服务
@@ -22,7 +24,8 @@ app.engine('html', require('express-art-template'));
 app.set('views', path.join(__dirname, 'views'));
 //2/3.3模板的后缀
 app.set('view engine', 'html');
-
+//2.4post请求的中间键
+app.use(express.urlencoded({extended:false}))
 
 // 3.处理请求(挂载路由)
 app.use('/user',userRouter)
