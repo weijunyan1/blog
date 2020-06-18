@@ -4,11 +4,11 @@ const express = require('express');
 // 1.2 导入path模块
 const path = require('path');
 // 1.3 引入登录页面路由
-const indexRouter = require('./routes/indexRouter');
+const indexRouter = require('./routes-管理系统/indexRouter');
 // 1.4 引入关于用户的路由
-const userRouter = require('./routes/userRouter');
+const userRouter = require('./routes-管理系统/userRouter');
 // 1.5 引入关于文章的路由
-const articleRouter = require('./routes/articleRouter');
+const articleRouter = require('./routes-管理系统/articleRouter');
 // 1.6 引入express-sesssion
 const session = require('express-session');
 // 2.设置包
