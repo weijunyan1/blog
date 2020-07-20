@@ -1,0 +1,54 @@
+.photo {
+    width: 1903px;
+    height: 600px;
+    overflow: hidden;
+    background-image: url(../img/second-common3.jpg);
+    position: relative;
+}
+
+
+.music {
+    text-align: center;
+}
+
+.up {
+    width: 100px;
+    height: 100px;
+    /* border: 1px solid red; */
+    margin-left: 750px;
+    margin-top: 100px;
+    font-size: 50px;
+    color: cornflowerblue;
+}
+
+ul {
+   
+    margin-left: 504px;
+    width: 500px;
+    height: 375px;
+    /* border: 1px solid red; */
+}
+
+i {
+
+    color: cornflowerblue;
+    font-size: 27px;
+}
+
+li {
+   
+    margin-top: 188px;
+    /* background-color: black; */
+    /* border: 1px solid red; */
+    width: 394px;
+    height: 156px;
+    list-style: none;
+    margin-left: 61px;
+}
+
+img{
+    position: absolute;
+    top: 256px;
+    height: 273px;
+    left: 652px;
+}
