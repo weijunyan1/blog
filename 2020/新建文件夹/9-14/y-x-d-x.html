@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //创建类class创建一个明星类
+        class star {
+
+            //1此刻constructor后面跟的是形参
+            //4将刘德华传递给uname
+            constructor(uname) {
+                //2.接收参数
+                this.uname = uname
+                //5.uname将值传递给this.uname
+                //this指向你所创建的实例 --- ldh
+            }
+        }
+        //利用类创建对象 new
+        //new star()
+        //传递参数
+        var ldh = new Star('刘德华')
+        var zxy = new Star('张学友')
+        //3此处的new自动调用了constructor
+
+
+        class Str {
+            constructor(uane, age) {
+                this.name = name;
+                this.age = age;
+            }
+        }
+        var ldh = new Str('刘德华', 18)
+        var zxy = new Str('张学友', 18)
+    </script>
+</body>
+
+</html>
