@@ -106,11 +106,294 @@ var  xx=new  name()
 
 constructor()方法是类的构造函数（默认方法）用于传递参数，返回实例化对象，通过new命令生成对象实例时，自动调用该方。法如果没有显示定义，类内部会自动给我们创建一个constraint（）
 
+### 类的属性
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //创建类class创建一个明星类
+        class star {
+
+            //1此刻constructor后面跟的是形参
+            //4将刘德华传递给uname
+            constructor(uname) {
+                //2.接收参数
+                this.uname = uname
+                //5.uname将值传递给this.uname
+                //this指向你所创建的实例 --- ldh
+            }
+        }
+        //利用类创建对象 new
+        //new star()
+        //传递参数
+        var ldh = new Star('刘德华')
+        var zxy = new Star('张学友')
+        //3此处的new自动调用了constructor
+
+
+        class Str {
+            constructor(uane, age) {
+                this.name = name;
+                this.age = age;
+            }
+        }
+        var ldh = new Str('刘德华', 18)
+        var zxy = new Str('张学友', 18)
+    </script>
+</body>
+
+</html>
+```
+
+注意：
+
+通过class关键字创建类，类名我们还是习惯性首字母大写
+
+类里面有一个constructor函数，可以接收传递过来的参数，同时返回实例对象
+
+constructor函数，只要new生成实例时，就会自动调用这个函数，如果我们不写这个函数，类也会自动调用
+
+生成实例new不能省略
+
+最后注意语法规范，创建类，类名后面不要加小括号，生成实例，类名的后面要加小括号，构造函数不需要加function
+
+### 类的方法
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
 
 
 
+        class Str {
+            constructor(uane, age) {
+                this.name = name;
+                this.age = age;
+            }
+            //方法---唱歌
+            sing(song){
+                //console.log("我会唱歌")
+                //打印
+                console.log(this.name+song)
+
+            }
+        }
+        var ldh = new Str('刘德华', 18)
+        var zxy = new Str('张学友', 18)
+        console.log(ldh)
+        console.log(zxy)
+        //调用函数
+        ldh.sing()
+        zxy.sing()
+        //传递参数
+        ldh.sing('冷冷的冰雨在我脸上胡乱的拍');
+        zxy.sing('李香兰')
+
+    </script>
+</body>
+
+</html>
+```
+
+我们类里面是所有函数不需要写function
+
+多个函数之间不需要添加逗号分隔
 
 ## 3类的继承
+
+现实中的继承，子承父业，比如我们继承了父亲是姓氏
+
+程序中的继承，子类可以继承父类的一些属性和方法
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //父类
+        class Father {
+            constructor(){
+
+            }
+            money(){
+                console.log(100)
+            }
+        }
+        //子类
+        class Son extends Father{
+
+        }
+        //实例化字类
+        var son=new Son()
+        //康康能不能调用父类里面的方法
+        son.Money()
+    </script>
+</body>
+
+</html>
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Father{
+            constructor(x,y){
+                this.x=x;
+                this.y=y;
+            }
+            sum(){
+                console.log(this.x+this.y)
+            }
+        }
+        class Son extends Father{
+            constructor(x,y){
+                //错误
+                // this.x=x;
+                // this.y=y;           
+                //使用super调用父类中的构造函数
+                super(x,y)                       
+            }
+        }
+        //传参
+        var son=new Son(1,2)
+        //调用继承方法
+        son.sum();
+    </script>
+</body>
+</html>
+```
+
+### super关键字（继承父类）
+
+super关键字用于访问和调用对象父类上的函数，可以调用父类的构造函数，也可以调用父类的普通函数
+
+继承中：如果实例化字类输出一个方法，先看字类有没有这个方法，如果有就先执行子类的
+
+继承中：如果子类里面没有，就去查找父类有没有这个方法，如果有，就执行父类这个方法（就近原则）
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+       class Father{
+           say(){
+               return "我是爸爸";
+           }
+       }
+       class Son extends Father{
+           say(){
+               //console.log('我的儿子')
+               console.log(super.say()+"的儿子")
+               //super.say()就是调用父类中的普通函数 say()
+           }
+       }
+       var son=new Son
+       son.say()
+   </script>
+
+</body>
+</html>
+```
+
+
+
+### 字类继承父类，并对父类进行扩展
+
+注意：
+
+字类在构造函数中使用super,必须放到this前面
+
+必须先调用父类的构造方法，在使用子类的构造方法
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Father {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+            sum() {
+                console.log(this.x + this.y)
+            }
+        }
+        //字类继承父类的加法后同时扩展减法的方法
+        class Son {
+            constructor(x, y) {
+                //用super调用父类的构造函数时，super必须在子类this之前调用
+                super(x, y)
+                this.x = x;
+                this.y = y;
+
+
+            }
+            subtract() {
+                console.log(this.x - this.y);
+            }
+        }
+        var son = new Son(5, 3);
+        son.subtract()
+        son.sum()
+    </script>
+</body>
+
+</html>
+```
+
+### 类和对象的的三个注意点
+
+1.在ES6中类没有提升变量，所以必须先定义类，才能通过类来实例化对象
+
+2.类里面的共有属性和方法一定要加this使用
+
+
 
 ## 4面向对象的案例
 

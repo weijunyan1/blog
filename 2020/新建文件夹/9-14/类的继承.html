@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //父类
+        class Father {
+            constructor(){
+
+            }
+            money(){
+                console.log(100)
+            }
+        }
+        //子类
+        class Son extends Father{
+
+        }
+        //实例化字类
+        var son=new Son()
+        //康康能不能调用父类里面的方法
+        son.Money()
+    </script>
+</body>
+
+</html>
