@@ -11,7 +11,10 @@
             constructor(uname,age){
                 this.uname=uname
                 this.age=age
+                //想要在constructou中调用sing方法就需要使用this
+                this.sing()
             }
+            //方法也属于constructor创建出来的实例对象
             sing(){
                 console.log(this.uname)
             }

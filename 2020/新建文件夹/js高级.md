@@ -393,9 +393,301 @@ super关键字用于访问和调用对象父类上的函数，可以调用父类
 
 2.类里面的共有属性和方法一定要加this使用
 
+3.this的指向问题
+
+constructor中的this指向是的是我们所创建的实例
+
+而例子中的实例为Star
+
 
 
 ## 4面向对象的案例
+
+## 构造函数和原型
+
+目标
+
+能够使用构造函数
+
+能够说出原型的作用
+
+能够说出访问对象成员的规则
+
+能够使用访问对象成员的规则
+
+能够使用ES6新增的一些方法
+
+### 1.构造函数和原型
+
+1.1概述：
+
+在典型的面向对象（OOP）的语言中（如Java）,都存在类的概念，类就是对象的模板，对象就是类的实例，但在ES6之前，js中并没有引用类的概念
+
+现在目前的浏览器的JS都是ES5版本，虽然大部分高版本浏览器也支持ES6但只实现了ES6的部分功能
+
+在ES6之前对象不是基于类创建的，而是利用一种称为构造函数的特殊函数来定义对象和他们的特征
+
+1.2创建对象可以通过一下三种方式：
+
+字面量创建对象
+
+new Object()创建对象
+
+构造函数创建对象
+
+构造函数是一种特殊的函数，主要用来初始化对象，及为对象成员变量赋值初始值，它总与new一起使用，我们可以吧对象中的一些公共属性和方法抽取出来，然后封装到这个函数里面
+
+注意点：
+
+构造函数用于创建某一类对象，其首字母要大写
+
+构造函数要和new一起使用菜有意义
+
+new在执行中会做的四件事情:
+
+在内存中创建一个新的空对象
+
+让this指向这个空对象
+
+执行构造函数里面的代码，给这个新对象添加属性和方法
+
+返回这个新对象（所以构造函数里面不需要return）
+
+构造函数中可以添加一下成员，可以在构造函数本身添加，也可以子啊构造函数的内部的this上添加。通过这两种方式添加是成员 ，就分别称为静态成员和实例成员
+
+实例成员：在构造函数内部创建的对象成员称为实例成员，只能由实例化的对象来访问
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //构造函数中的属性和方法我们称为成员，成员可以添加
+        class Star {
+            constructor(uname, age) {
+                this.uname = uname
+                this.age = age
+                this.sing=function(){
+                    console.log("我会唱歌")
+                }
+            }
+        }
+        var ldh=new Star('刘德华',18)
+        //实例成员就是构造函数内部通过this添加的成员uname,age,sing就是实例成员
+        //实例化成员只能通过实例化的对象（ldh）来访问
+        //使用其中的元素
+        console.log(ldh.uname)
+        //使用其中的方法
+        ldh.sing()
+    </script>
+</body>
+
+</html>
+```
+
+静态成员：在构造函数本身上添加的成员称为静态成员，只能由构造函数本身来访问
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //构造函数中的属性和方法我们称为成员，成员可以添加
+        class Star {
+            constructor(uname, age) {
+                this.uname = uname
+                this.age = age
+                this.sing=function(){
+                    console.log("我会唱歌")
+                }
+            }
+        }
+        var ldh=new Star('刘德华',18)
+        //实例成员就是构造函数内部通过this添加的成员uname,age,sing就是实例成员
+        //实例化成员只能通过实例化的对象（ldh）来访问
+        //使用其中的元素
+        console.log(ldh.uname)
+        //使用其中的方法
+        ldh.sing()
+
+        //静态成员
+        Star.sex="男";
+        //静态成员只能通过构造函数来访问
+        console.log(Star.sex)
+    </script>
+</body>
+
+</html>
+```
+
+构造函数的问题
+
+，构造函数方法很好用但是存在内存浪费的问题
+
+如何浪费嘞
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //构造函数的问题
+        function Star(uname,age){
+            this.uname=uname;
+            this.age=age
+            this.sing=function(){
+                console.log("我会唱歌")
+            }
+        }
+        var ldh=new Star("刘德华",18)
+        var zxy=new Star("张学友",18)
+        //下面的等于的错误的
+        //所有它在这里用了两个内存空间
+        console.log(ldh.sing===zxy.sing)
+    </script>
+</body>
+</html>
+```
+
+因此：
+
+我们希望所有的对象都使用同一个函数，这样就节省内存了
+
+### 构造函数原型prototype
+
+构造函数通过原型对象分配的函数是所有对象共享的
+
+JS规定，每一个构造函数都有一个prototype属性，指向另一个对象，其中protptype就是一个对象，这个对象的所有属性和方法都会被构造函数所拥有
+
+我们可以吧哪些不变的方法，直接定义在prototype对象上。这样所有的实例就可以共享这些方法
+
+原型是什么
+
+是对象
+
+作用是什么
+
+实现了方法的共享
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //构造函数的问题
+        function Star(uname,age){
+            this.uname=uname;
+            this.age=age
+            this.sing=function(){
+                console.log("我会唱歌")
+            }
+        }
+        var ldh=new Star("刘德华",18)
+        var zxy=new Star("张学友",18)
+        //下面的等于的错误的
+        //console.log(ldh.sing===zxy.sing)
+        console.dir(Star)
+        //可以看到Star中包含prototype对象
+    </script>
+</body>
+</html>
+```
+
+prototype的作用
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //构造函数的问题
+        function Star(uname,age){
+            this.uname=uname;
+            this.age=age
+            // this.sing=function(){
+            //     console.log("我会唱歌")
+            //}
+        }
+        //将sing方法放到构造函数外面
+        //在构造函数的原型对象的里面添加sing这个方法
+        //因为原型对象是对象可以动态的添加属性和方法
+        Star.prototype.sing=function(){
+            console.log("我会唱歌")
+        }
+        var ldh=new Star("刘德华",18)
+        var zxy=new Star("张学友",18)
+
+        //调用原型对象的方法
+        ldh.sing()
+        zxy.sing()
+        //此刻他们是相同的空间
+        console.log(ldh.sing=zxy.sing)
+
+        //注意：
+        //一般情况下，我们的公共属性定义到构造函数的里面，公共的方法我们放到原型对象的身上
+    </script>
+</body>
+</html>
+```
+
+###  对象原型(__proto__)
+
+对象都会有一个属性_proto_,指向构造函数的prptotype原型对象，之所以我们可以使用构造函数prototype原型对象的属性和方法，就应为对象有proto原型存在
+
+proto对象原型和原型对象prototype是等价的
+
+![](D:\fei-qiu\图片\Snipaste_2020-09-16_13-33-19.png)
+
+
+
+### 构造函数constructor
+
+对象原型proto和构造函数原型对象prototype里面都有一个属性constraint属性
+
+constructor我们称为构造函数，因为它指回构造函数本身
+
+costructor主要用于记录该对象用于那个构造函数，它可以让原型对象重新指向原来的构造函数
+
+
+
+
+
+
+
+
+
+### 2.继承
+
+### 3.ES5中新增的方法
 
 
 

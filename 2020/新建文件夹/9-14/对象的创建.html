@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //new object()创建对象
+        var obj=new Object()
+        //字面量创建对象
+        var obj2={}
+        //构造函数创建对象
+        function Star(uname,age){
+            this.uname=uname;
+            this.age=age;
+            this.sing=function(){
+                console.log('我会唱歌')
+            }
+        }
+    var ldh=new Star('刘德华',18)
+    var zxy=new Star('郑秀妍',13)
+    console.log(ldh)
+    //调用公共的方法
+    ldh.sing()
+    zxy.sing()
+    </script>
+</body>
+</html>
