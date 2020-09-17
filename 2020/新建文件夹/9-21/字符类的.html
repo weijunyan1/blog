@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //[]代表可选的
+
+        //1，简单的
+        //2.^以xxx开头,$以xxx结尾的
+        var rgi=/^[abc]$/;
+        //三选一只有是a或b或c这三个字母的才可以返回true
+        console.log(rgi.test('a'))
+        console.log(rgi.test('b'))
+        console.log(rgi.test('c'))
+        console.log(rgi.test('abc'))
+        
+         
+
+    </script>
+</body>
+</html>
