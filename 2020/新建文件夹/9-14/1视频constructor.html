@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //构造函数的问题
+        function Star(uname,age){
+            this.uname=uname;
+            this.age=age
+            // this.sing=function(){
+            //     console.log("我会唱歌")
+            //}
+        }
+
+        Star.prototype.sing=function(){
+            console.log("我会唱歌")
+        }
+
+        var ldh=new Star("刘德华",18)
+        var zxy=new Star("张学友",18)
+
+
+        //他们的返回对象中都有constructor
+        //原型对象
+        console.log(Star.prototype);
+        //对象原型
+        console.log(ldh.__proto__)
+        //都返回了构造函数本身
+          //原型对象
+          console.log(Star.prototype.constrcutor);
+        //对象原型
+        console.log(ldh.__proto__.constrcutor)
+
+    </script>
+</body>
+</html>

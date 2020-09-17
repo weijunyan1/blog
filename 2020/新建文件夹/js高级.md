@@ -669,6 +669,47 @@ proto对象原型和原型对象prototype是等价的
 
 
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //构造函数的问题
+        function Star(uname,age){
+            this.uname=uname;
+            this.age=age
+            // this.sing=function(){
+            //     console.log("我会唱歌")
+            //}
+        }
+
+        Star.prototype.sing=function(){
+            console.log("我会唱歌")
+        }
+
+        var ldh=new Star("刘德华",18)
+        var zxy=new Star("张学友",18)
+
+        //问题sing明明是原型对象prototype的方法，为什么ldh可以用
+        ldh.sing()
+        //打印ldh
+        console.log(ldh)
+        //其中自动添加了__proto__属性，而__proto__指向的就是prototype原型对象
+        consolel.log(ldh.__proto__===Star.prototype)
+        //方法的查找规则
+        //首先看ldh对象身上是否有sing这个方法，如果有就执行
+    </script>
+</body>
+</html>
+```
+
+
+
 ### 构造函数constructor
 
 对象原型proto和构造函数原型对象prototype里面都有一个属性constraint属性
