@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //利用递归函数求斐波那契数列（及兔子序列）1，1，2，3，5，8
+        //要求：用户输入一个数字n就可以求出这个数组对应的兔子序列值
+        //思路：我们只要知道用户输入的n的前面两项n-1和n-2对应的值就可以算出n对应的值
+        //此处的n都代表的是下标
+        function fb(n){
+            if(n===1||n===2){
+                return 1;
+            }
+            return fb(n-1)+fb(n-2)
+        }
+        console.log(fb(3))
+    </script>
+</body>
+</html>
