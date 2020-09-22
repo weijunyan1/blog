@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        //浅拷贝只是拷贝一层，更深层次对象级别的只拷贝引
+        //深拷贝拷贝多层，每一级别的数据都会拷贝
+        var obj = {
+            id: 1,
+            name = "andy"
+        }
+        //将obj对象拷贝给o的空对象(for   in便利)
+        var o = {}
+        for (var k in obj) {
+            //k是属性名 obj[k]是属性值
+            o[k] = obj[k]
+        }
+        console.log(o)
+        o.msg.age = 20
+        console.log(obj)
+        
+        //浅拷贝只可以拷贝浅层是数据，更深层次的东西只会得到地址，在改变后会影响初始数据
+        Object.assign(o,obj)
+        console.log(o)
+   </script>
+</body>
+
+</html>
