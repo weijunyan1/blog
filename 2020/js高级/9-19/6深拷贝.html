@@ -7,41 +7,39 @@
 </head>
 <body>
     <script>
-        var obj={
-            id:1,
-            name:'andy',
-            msg:{
-                age:18
+        var obj = {
+            id: 1,
+            name: 'andy',
+            msg: {
+                age: 18
             },
             color: ['pink', 'red']
         };
-        var o={}
-        //封装函数
-        function deepCopy(newobj,oldobj){
-            //遍历原暑假
+        //创建一个空数组用于拷贝
+        let o={}
+        //定义一个深拷贝函数
+        function deep(newobj,oldobj){
+            //使用 for  in遍历对象
             for(var k in oldobj){
-                //判断我们的属性值属于那种类型
-                //1.获取属性值oldobj[k]
+                //获取元素
                 var item=oldobj[k]
-                //判断属性值的类型是数组吗
+                //判断元素
                 if(item instanceof Array){
-                    //新的属性值是空
+                    //如果得到的值是数组就创建一个空数组，然后将值拷贝到新数组中
                     newobj[k]=[]
-                    //将原来的属性值拷贝到了新的空是数组中
-                    deepCopy(newobj[k],item)
-
-                }else if(item instanceof Object){ //判断这个值的类型是对象吗
+                    deep(newobj[k].item)
+                }else if(item instanceof Object){
                     newobj[k]={}
-                    deepCopy(newobj[k],item)
-                }else{ //是属于简单函数吗
+                    deep(newobj[k].item)
+                }else{
                     newobj[k]=item
                 }
-               
-               
             }
         }
-        deepCopy(o.obj)
-        console.log(o);
+        //传值
+        depp(o,obj)
+        console.log(o)
+
     </script>
 </body>
 </html>

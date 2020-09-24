@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='app'>
+        <button @click="handleRun">浪起来</button>
+        <button @click="handleStop">消停会儿</button>
+        <h3>{{msg}}</h3>
+    </div>
+
+    <script src="../9-22/lib/vue-3.0.js"></script>
+
+    <script>
+        //创建一个vm并且挂载到app上
+        let vm=Vue.createApp({
+            data(){
+                return{
+                    //刚进入页面现实第一句话
+                    msg:'稳住，我们能赢',
+                    //定时器是ID
+                    interID:null
+                }
+            },
+            methods:{
+                //1.运动
+                handleRun(){
+                    //判断定时器的id是否为null
+                    if(this.interID!==null)return
+                    //开启新的定时器
+                    this.interID=setInterval(()=>{
+                        //获取整句话的第一个字
+                        let start=this.msg.slice(0,1)
+                        //获取除第一个字以外的所有字
+                        let end=this.msg.slice(1)
+                        //把第一个字和其他字联系起来
+                        this.msg=end+start
+
+                    },500)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

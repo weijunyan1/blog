@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //创建函数
+        function fn(n){
+            //判断传入的值是不是1
+            if(n==1){
+                return 1
+            }
+            //如果不是1就进行累乘
+            return n*fn(n-1)
+        }
+        //传入参数
+        console.log(fn(3))
+    </script>
+</body>
+</html>

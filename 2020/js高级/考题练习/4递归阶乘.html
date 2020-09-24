@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //创建递归函数
+        function fn(n){
+            //判断输入的值是不是1
+            if(n==1){
+                return 1
+            }
+            return n*fn(n-1)
+        }
+        //传参
+        console.log(fn(3))
+    </script>
+</body>
+</html>

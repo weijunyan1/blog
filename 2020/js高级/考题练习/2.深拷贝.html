@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = {
+            id: 1,
+            name: 'andy',
+            msg: {
+                age: 18
+            },
+            color: ['pink', 'red']
+        };
+        //创建一个空对象用于存放拷贝
+        var o={};
+       //声明一个深拷贝的函数
+       function deep(newobj,oldobj){
+           //用for in循环遍历旧的对象
+           for(var k in oldobj){
+               //获取旧对象的属性值
+               var item=oldobj[k]
+               //判断获取的值
+               if(item instanceof Array){
+                   //如果获取的值为数组，则将其拷贝到新数组中
+                   newobj[k]=[];
+                   deep(newobj[k],item)
+               }else if(item instanceof Object){
+                newobj[k]=[];
+                   deep(newobj[k],item)
+               }else{
+                newobj[k]=item
+               }
+           }
+       }
+    </script>
+</body>
+</html>
