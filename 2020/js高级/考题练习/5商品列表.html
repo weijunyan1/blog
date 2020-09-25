@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 400px;
+            border: 1px solid #000;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        td,
+        th {
+            border: 1px solid #000;
+            text-align: center;
+        }
+
+        input {
+            width: 50px;
+        }
+
+        .search {
+            width: 600px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search">
+        按照价格查询: <input type="text" class="start"> - <input type="text" class="end"> <button
+            class="search-price">搜索</button>
+        按照商品名称查询: <input type="text" class="product"> <button class="search-pro">查询</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>产品名称</th>
+                <th>价格</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+        </tbody>
+    </table>
+
+    <script>
+        // 数据
+        // 利用新增数组方法操作数据
+        var data = [{
+            id: 1,
+            pname: '小米',
+            price: 3999
+        }, {
+            id: 2,
+            pname: 'oppo',
+            price: 999
+        }, {
+            id: 3,
+            pname: '荣耀',
+            price: 1299
+        }, {
+            id: 4,
+            pname: '华为',
+            price: 1999
+        }];
+        //将数据渲染到页面中去
+        //使用for  each 遍历数组
+        //获取相应的元素(及后来将数据渲染的位置)
+        var tbody = document.querySelector('tbody')
+        var search_price = document.querySelector('.search-price')
+        var start = document.querySelector('.start')
+        var end = document.querySelector('.end')
+        var product = document.querySelector('.product')
+        var search_pro = document.querySelector('.search-pro')
+
+        //把数据渲染到页面
+        setDate(data)
+
+        function setDate(mydata) {
+
+            //要先清空原来的数据，然后在更具条件将符合条件的数据进行渲染
+            tbody.innerHTML = " ";
+
+            //使用forEach 遍历数组 将数组渲染到指定位置
+            (mydata.forEach(function (value) {
+                    //此时回调函数的forEach的value是一个对象
+                    //console.log(value)
+                    //获取对象后，创建存放对象的行
+                    var tr = document.createElement('tr')
+                    //在创建好的行中插入数值
+                    tr.innerHTML = '<td>' + value.id + '</td><td>' + value.pname + '</td><td>' + value.price +
+                        '</td>'
+                    //在将行添加到tbody中
+                    tbody.appendChild(tr)
+                })
+
+
+
+            )
+        };
+
+        //根据价格查询商品
+        //当我们点击了按钮，就可以根据我们的商品价格去筛选数组里面的对象
+        //addEventListener用于向指定元素添加事件句柄
+        search_price.addEventListener('click', function () {
+            //alert(11)
+            var newData = data.filter(function (value) {
+                return value.price >= start.value && value.price <= end.value
+            });
+            //console.log(newData)
+            //把筛选之后的对象渲染带页面中去   (如果要渲染的话，需要将筛选出来的新数组进行遍历，所以和第一步是遍历插入数组有相同之处)
+            setDate(newData)
+        });
+
+
+
+
+        //4根据商品名称查找商品
+        //如果查询数组中唯一的元素，用some方法更合适应为它找到这个元素后，就不在进行循环，效率更高
+        search_pro.addEventListener('click', function () {
+            var arr = []
+            data.some(function (value) {
+                //如果输入值和以存在数组相同
+                if (value.pname == product.value) {
+                    //此处拿到的是对象
+                    // console.log(value)
+                    //将拿到的对象添加到新建的数组中去
+                    arr.push(value)
+                    return true
+                }
+            });
+            //把拿到的数据渲染到页面中去
+            setDate(arr)
+        })
+    </script>
+</body>
+
+</html>

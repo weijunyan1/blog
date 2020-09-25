@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 400px;
+            border: 1px solid #000;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        td,
+        th {
+            border: 1px solid #000;
+            text-align: center;
+        }
+
+        input {
+            width: 50px;
+        }
+
+        .search {
+            width: 600px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search">
+        按照价格查询: <input type="text" class="start"> - <input type="text" class="end"> <button
+            class="search-price">搜索</button>
+        按照商品名称查询: <input type="text" class="product"> <button class="search-pro">查询</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>产品名称</th>
+                <th>价格</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+        </tbody>
+    </table>
+
+    <script>
+        //1创建数组
+        var data = [{
+            id: 1,
+            pname: '小米',
+            price: 3999
+        }, {
+            id: 2,
+            pname: 'oppo',
+            price: 999
+        }, {
+            id: 3,
+            pname: '荣耀',
+            price: 1299
+        }, {
+            id: 4,
+            pname: '华为',
+            price: 1999
+        }];
+
+
+
+
+        //2获取所需元素
+        var tbody = document.querySelector('tbody')
+        var thead = document.querySelector('thead');
+        var start = document.querySelector('.start');
+        var end = document.querySelector('.end');
+        var search_price = document.querySelector('.search-price')
+        var product = document.querySelector('.product')
+        var search_pro = document.querySelector('.search-pro')
+
+
+
+        //功能一渲染数据
+
+        setDate(data)
+        //3创建函数将数据渲染到页面中去
+        function setDate(mydate) {
+            //照顾后期的操作先将数据清除一次
+            tbody.innerHTML = '';
+            //使用foreach遍历创建的数据
+            (mydate.forEach(function (value) {
+                //创建一个存放对象的行(createElement的作用是在对象中再次创建对象)
+                var tr = document.createElement('tr')
+                tr.innerHTML = '<td>' + value.id + '</td>' + '<td>' + value.pname + '</td>' + '<td>' + value
+                    .price + '</td>'
+                //将添加好的行渲染到tbody中(在列表中添加项目appendChild)
+                tbody.appendChild(tr)
+            }))
+        };
+
+
+        //功能三  根据商品名查询数据
+        //使用addEventListener给搜索按钮添加点击事件
+        search_pro.addEventListener('click',function(){
+            //创建一个空数组
+            //判断输入的名称和原有的名称进行比较
+            //看看有没有相同的
+            //如果有相同的获取此元素的valu
+            //将获取到的value添加到新是数组中
+            //将新是数组渲染到页面中去
+            var arr=[];
+            data.some(function(value){
+                if(value.pname==product.value){
+                    arr.push(value)
+                    return true
+                }
+            })
+            //把拿到的数据渲染到页面中去
+            setDate(arr)
+        })
+
+
+        //功能二   根据价格查询商品
+        //给搜索按钮添加点击事件
+        //创建一个新的对象
+        //然后使用filter将原数组进行过滤
+        //return 过滤条件
+        //然后将过滤后的对象渲染到页面中
+        search_price.addEventListener('click',function(value){
+           
+            var newDate=data.filter(function(value){
+                return value.price >= start.value && value.price <= end.value
+            })
+            setDate(newDate)
+        })
+
+
+
+    </script>
+</body>
+
+</html>
