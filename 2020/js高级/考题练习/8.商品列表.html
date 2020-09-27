@@ -122,7 +122,18 @@
 
         //5。通过商品名称查询数据
         //给查询按钮添加点击事件
-  
+        search_pro.addEventListener('click',function(value){
+            //创建一个空数组
+            var arr2=[]
+            //使用some遍历数组
+            data.some(function(value){
+                if(value.pname==product.value){
+                    arr2.push(value)
+                    return true
+                }
+            })
+            oveDate(arr2)
+        })
     </script>
 </body>
 
