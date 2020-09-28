@@ -1,39 +1,29 @@
-window.onload = function () {
-    //1.获取值
-    //手机号
-    var tel = document.querySelector('#tel')
-    //qq
-    var qq = document.querySelector('#qq')
-    //昵称
-    var nc = document.querySelector('#nc')
-    //短信验证码
-    var msg = document.querySelector('#msg')
-    //密码
-    var pwd = document.querySelector('#pwd')
-
-
-
+Window.onload = function () {
+    //获取元素
+    var tel = document.querySelector('#tel');
+    var qq = document.querySelector('#qq');
+    var nc = document.querySelector('#nc');
+    var msg = document.querySelector('#msg');
+    var pwd = document.querySelector('#pwd');
+    var surepwd = document.querySelector('#surepwd');
 
 
 
     //正则表达式
-    var reqTel = /^1[3,4,5,7,8]\d{9}$/
-    var reqQq = /^[1-9]\d{4,9}$/
-    var reqMsg = /\d{6}/
+    var regtel = /^1[3|4|5|7|8]\d{9}$/; // 手机号码的正则表达式
+    var regqq = /^[1-9]\d{4,}$/; // 10000
     var regnc = /^[\u4e00-\u9fa5]{2,8}$/;
-    var regpwd = /^[a-zA-Z0-9_-]{6,16}$/;
+    var regmsg = /^\d{6}$/;
+    var reqpwd = /^[a-zA-Z0-9_-]{6-16}$/
 
 
+    //实参
+    yz(tel, regtel)
+    yz(qq, regqq)
 
+    yz(nc, regnc)
+    yz(msg, regmag)
+    yz(pwd, regpwd)
 
-    //传参
-
-
-
-
-    //创建一个函数
-    function num(arr,arr1){
-    //chuan'j
-    }
-
+ 
 }

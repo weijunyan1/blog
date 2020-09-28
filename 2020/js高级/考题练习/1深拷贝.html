@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -17,32 +17,17 @@
             },
             color: ['pink', 'red']
         };
-        //1.创建一个用于拷贝的空数组
-        let o={};
-        //2.定义一个深拷贝函数 
+       
+
+        //创建一个对象
+        var hh1={}
         function deep(newobj,oldobj){
-            //3.使用for  in遍历原对象(原因：js中的对象是无序的，通过for循环是无法遍历的，这时就可以通过for in来循环遍历)、
-            for(var k in oldobj){
-                //4。判断我们的属性值属于那种类型
-                //4.1想要判断属性值是属于那种类型，就要先获取属性值
-                var item=oldobj[k]
-                //4.2进行判断
-                if(item instanceof Array){
-                    //如果是得到的值的类型是数组
-                    //就用新数组创建一个空数组
-                    newobj[k]=[]
-                    //将这个值拷贝进新的空数组中
-                    deep(newobj[k],item)
-                }else if(item instanceof Object){
-                    newobj[k]={}
-                    deep(newobj[k],item)
-                }else{
-                    newobj[k]=item
-                }
-            }
+            //循环遍历原对象
+            
+
         }
-        deep(o.obj)
-        console.log(o);
+        //传参
+        deep(hh1,obj)
     </script>
 </body>
 

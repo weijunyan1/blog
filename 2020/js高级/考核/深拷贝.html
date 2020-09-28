@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var obj = {
+            id: 1,
+            name: "andy",
+            msg: {
+                age: 18,
+            },
+            color: ["pink", "red"],
+        };
+
+        //创建一个新对象
+        var arr = {}
+        //创建一个深拷贝函数
+        function deep(newobj, oldobj) {
+            //循环遍历对象
+            for (var k in oldobj) {
+                //获取元素
+                var huo = oldobj[k]
+                //判断
+                //判断是否为数组
+                if (huo instanceof Array) {
+                    newobj[k] = []
+                    deep(newobj[k], huo)
+                }else if(huo instanceof Object){
+                    newobj[k]=[]
+                    deep(newobj[k],huo)
+                }else{
+                    newobj[k]=huo
+                }
+            }
+           
+        }
+         //传参
+        deep(arr, obj)
+        arr.msg.age=20
+        console.log(arr)
+    </script>
+</body>
+
+</html>
