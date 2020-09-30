@@ -12,7 +12,7 @@
         <div>
             <span>用户名</span>
             <span>
-                <input type="text" v-model.lazy="uname">
+                <input type="text" v-model="uname">
             </span>
             <span>{{tip}}</span>
         </div>
@@ -22,7 +22,7 @@
 
     <script>
         let vm=Vue.createApp({
-            //数据
+            //接收储存发送数据
             data(){
                 return{
                     uname:'',
@@ -30,15 +30,15 @@
                 }
             },
 
-
             //方法
             methods:{
-                checkName(uname){
-                    var that=this
+                createName(){
+                    let that=this
                     //添加定时器
                     setTimeout(function(){
-                        if(uname=='小心'){
-                            that.tip="用户名存在"
+                        //判断
+                        if(that.name=="小心"){
+                            that.tip="用户名重复"
                         }else{
                             that.tip="用户名可以用"
                         }
@@ -49,17 +49,20 @@
 
             //监听
             watch:{
-              //监听uname的变化
-              uname:function(val){
-                  //根据uname的改变，进行变化
-                  this.checkName(val)
-                  //给tip添加语句
-                  this.tip="正在验证中....."
-              }
+                //监听uname的变化
+                uname:function(){
+                    //给tip添加内容
+                    this.tip="正在监听中。。。。。。"
+                    //给nume添加点击方法
+                    this.createName()
+                }
             }
+
+
+
         }).mount('#app')
     </script>
-    
+
 </body>
 
 </html>

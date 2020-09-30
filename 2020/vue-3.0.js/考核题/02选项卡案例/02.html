@@ -51,11 +51,63 @@
 </head>
 
 <body>
-<!-- 1.写模板-->
-<div id="app">
-    
-</div>
-  
+
+
+  <!-- 写模板 -->
+  <div id="app">
+    <div class="tab">
+      <ul>
+
+        <li v-for="(item,index) in aLast"  :key="item.id"  :class="num==index?'active':'' "   @click="arr(index)">{{item.id}}</li>
+
+
+        <div v-for="(item,index) in aLast"  :key="item.id"  :class="num==index?'current':'' ">
+          <img :src="item.imgs" alt="">
+
+        </div>
+      </ul>
+    </div>
+  </div>
+
+
+  <script src="../lib/vue-3.0.js"></script>
+
+  <script>
+    let vm=Vue.createApp({
+      data(){
+        return{
+          num:0,
+          aLast:[
+            {
+              id:1,
+              name:'拉拉',
+              imgs:'../图片/01.gif'
+            },
+            {
+              id:2,
+              name:'拉拉',
+              imgs:'../图片/02.gif'
+            },
+            {
+              id:3,
+              name:'拉拉',
+              imgs:'../图片/03.gif'
+            },
+          ]
+        }
+
+      },
+
+      //方法
+      methods:{
+        arr(index){
+          this.num=index
+        }
+      }
+    }).mount('#app')
+  </script>
+
+
 </body>
 
 </html>

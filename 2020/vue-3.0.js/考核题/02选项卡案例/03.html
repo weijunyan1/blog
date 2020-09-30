@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .tab ul {
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tab ul li {
+            box-sizing: border-box;
+            padding: 0;
+            float: left;
+            width: 100px;
+            height: 45px;
+            line-height: 45px;
+            list-style: none;
+            text-align: center;
+            border-top: 1px solid blue;
+            border-right: 1px solid blue;
+            cursor: pointer;
+        }
+
+        .tab ul li:first-child {
+            border-left: 1px solid blue;
+        }
+
+        .tab ul li.active {
+            background-color: orange;
+        }
+
+        .tab div {
+            width: 500px;
+            height: 300px;
+            display: none;
+            text-align: center;
+            font-size: 30px;
+            line-height: 300px;
+            border: 1px solid blue;
+            border-top: 0px;
+        }
+
+        /* 被选中的图片 */
+        .tab div.current {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!-- 写模板 -->
+    <div id="app">
+        <div class="tab">
+            <ul>
+                <!-- 2将结构写好后就可以进行渲染了 -->
+                <!-- 如何渲染：首先将数据循环遍历，然后判断索引是否为0，并为其添加active事件 -->
+                <li v-for="(item,index)in arr" :key="item.id" :class="index==num?'active':'' " @click=" change(index)">
+                    {{item.title}}</li>
+
+
+                <div v-for="(item,index)in arr" :key="item.u=id" :class="index==num?'current':''">
+                    <img :src="item.imgSrc" alt="">
+
+                </div>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <script src="../lib/vue-3.0.js"></script>
+
+    <!-- 目的：就是根据上面点击的改变，进行图片的改变 -->
+    <script>
+        //1.先将基本结构写好
+        let vm = Vue.createApp({
+            //数据
+            data() {
+                return {
+                    //4
+                    num: 0,
+
+                    arr: [
+
+
+                        {
+                            id: 1,
+                            title: '拉拉',
+                            imgSrc: '../图片/01.gif',
+                            wz: '想不通'
+                        },
+                        {
+                            id: 2,
+                            title: '拉拉',
+                            imgSrc: '../图片/02.gif',
+                            wz: '想不通'
+                        },
+                        {
+                            id: 3,
+                            title: '拉拉',
+                            imgSrc: '../图片/03.gif',
+                            wz: '想不通'
+                        },
+                    ]
+                }
+            },
+
+
+            //5接收下标改变图片、
+            methods: {
+                change(index) {
+                    
+                    this.num = index
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

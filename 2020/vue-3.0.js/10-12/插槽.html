@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <template v-slot:left>
+        三
+        </template>
+        <template v-slot:center>
+            <input type="text">
+            </template>
+            <template v-slot:right>
+                <button>登录</button>
+                </template>
+
+                <template v-slot:default>
+                    <button>我是匿名插槽</button>
+                    </template>
+    </div>
+
+    <script src="../9-28/lib/vue-3.0.js"></script>
+    
+</body>
+</html>

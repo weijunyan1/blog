@@ -9,18 +9,20 @@
         .father {
             width: 400px;
             height: 400px;
-            border: 4px solid rgb(20, 83, 199);
+            border: 4px solid pink;
         }
 
         .son {
             width: 200px;
             height: 200px;
-            border: 2px solid hsl(182, 100%, 50%);
+            border: 4px solid yellow;
         }
     </style>
 </head>
 
 <body>
+
+    <script src="../lib/vue-3.0.js"></script>
 
 
     <div id="app">
@@ -28,60 +30,64 @@
     </div>
 
 
-    <script src="../lib/vue-3.0.js"></script>
-
     <script>
-        //跟组件
         let vm = Vue.createApp({})
+
+
+
         //父组件
         vm.component('father', {
             //数据
             data() {
-                return {}
+                return {
+                    word = "你好",
+                }
             },
-
 
             //方法
             methods: {
-                fatherF(val) {
-                    console.log("我是父组件的方法+val")
-                }
+
             },
 
 
             //模板
             template: `
-        
             <div class="father">
-        <h3>父组件</h3>
-        <son @father=fatherF></son>
-        </div>
-        `
+            <h3>父组件</h3>
+            <son :hellow=word></son>
+            </div>
+            `
         })
-
 
         //子组件
         vm.component('son', {
-         data(){
-             return{
-                 msg:'我是子组件的数据'
-             }
-         },
+            //数据
+            data() {
+                return {
 
-         //模板
-         template:`
-         <div class="son">
-            <h3 @click="$emit('father',msg)">子组件</h3>
+                }
+            },
+
+            //在子组件中添加存放数据的方法,并定义它的名字
+            props:["hellow"],
+
+            //方法
+            methods: {
+
+            },
+
+
+            //模板
+            template: `
+            <div class="son">
+            <h3>子组件</h3>
+            {{hellow}}
             </div>
-         `
-
-
+            `
         })
 
         vm.mount('#app')
     </script>
-
-
 
 </body>
 

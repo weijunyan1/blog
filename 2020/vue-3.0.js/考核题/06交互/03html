@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .gg {
+      float: left;
+      width: 400px;
+      height: 400px;
+      border: 4px solid green;
+    }
+
+    .cc {
+      float: right;
+      width: 200px;
+      height: 200px;
+      border: 2px solid red;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div id="app">
+    <gg></gg>
+    <cc></cc>
+  </div>
+
+
+
+  <!-- 连接库 -->
+  <script src="../lib/vue-3.0.js"></script>
+  <script src="../lib/mitt-2.1.0.js"></script>
+
+
+  <script>
+    //跟组件
+    let vm = Vue.createApp({})
+    let arr = mitt()
+
+
+    //创建哥哥组件
+    vm.component('gg', {
+      //数据
+      data() {
+        return {}
+      },
+
+      //方法
+      methods: {
+        add() {
+          //使用emit方法  hhh为传值名称  后面为所传的值
+          arr.emit('hhh', {
+            name: '小白'
+          })
+        }
+      },
+
+
+      //模板
+      //给事件添加点击方法
+      template:`
+      <div class="bora" @click="add"></div>
+      `
+
+    })
+
+
+    //创建弟弟组件
+    vm.component('cc',{
+      //数据
+      data(){
+        return{}
+      },
+
+      //接收传值
+      mounted(){
+        //使用mitt方法进行验证，并将接收值传入弟弟组件中
+        arr.on('hhh',(e)=>{this.msg = e.name})
+      },
+
+
+      //将传入值显示出来
+      template:`
+      <div class="borb">弟弟组件{{msg}}</div>
+      `
+    }),
+
+
+    vm.mount('#app')
+
+  </script>
+
+
+</body>
+
+</html>

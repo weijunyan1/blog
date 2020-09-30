@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bora {
+            width: 800px;
+            height: 50px;
+            border: 5px solid red;
+            float: left;
+        }
+
+        .borb {
+            width: 800px;
+            height: 50px;
+            border: 5px solid yellowgreen;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 兄长 -->
+        <gg></gg>
+        <!-- 弟弟 -->
+        <cc></cc>
+    </div>
+    <!-- 连接库 -->
+    <script src="../lib/vue-3.0.js"></script>
+    <script src="../lib/mitt-2.1.0.js"></script>
+    <script>
+        let vm=Vue.createApp({})
+        let arr=mitt()
+
+
+        //哥哥组件
+        vm.component('gg',{
+            //数据
+            data(){
+                return{
+
+                }
+            },
+
+            //方法
+            methods:{
+                add(){
+                    arr.emit('waihao',{name:'你好'})
+                }
+            },
+
+
+            //模板
+            template:`
+            <div class="bora" @click="add">哥哥组件<div>
+            `
+        })
+
+        //弟弟组件
+            vm.component('cc',{
+            //数据
+            data(){
+                return{
+                    src:''
+                }
+            },
+
+           mounted(){
+             arr.on('waihao',(e)=>{console.log(e.name)})
+            },
+
+            //模板
+            template:`
+            <div class="borb">弟弟组件{{msg}}<div>
+            `
+        })
+
+        vm.mount('#app')
+    </script>
+
+
+</body>
+
+</html>

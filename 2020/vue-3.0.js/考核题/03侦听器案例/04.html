@@ -21,7 +21,7 @@
     <script src="../lib/vue-3.0.js"></script>
 
     <script>
-        let vm=Vue.createApp({
+        let vm = Vue.createApp({
             //数据
             data(){
                 return{
@@ -31,35 +31,36 @@
             },
 
 
+
             //方法
             methods:{
-                checkName(uname){
-                    var that=this
-                    //添加定时器
-                    setTimeout(function(){
-                        if(uname=='小心'){
-                            that.tip="用户名存在"
+                checkName(){
+                    setTimeout(()=>{
+                        if(this.uname=="小心"){
+                            this.tip="用户名已存在"
                         }else{
-                            that.tip="用户名可以用"
+                            this.tip="用户名可以用"
                         }
-                    },2000)
+
+                    })
                 }
+
             },
+
 
 
             //监听
             watch:{
-              //监听uname的变化
-              uname:function(val){
-                  //根据uname的改变，进行变化
-                  this.checkName(val)
-                  //给tip添加语句
-                  this.tip="正在验证中....."
-              }
+                uname:function(val){
+                    this.tip="正在验证中....."
+                    this.checkName()
+                }
+
             }
-        }).mount('#app')
+
+        }).mount("#app")
     </script>
-    
+
 </body>
 
 </html>
