@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="handleRun">浪起来</button>
+        <button>消停会</button>
+        <h3>稳住，我们能赢！！！</h3>
+    </div>
+
+    <script src="../9-28/lib/vue-3.0.js"></script>
+
+    <script>
+        //创建了一个vue并挂载到app上
+        let vm = Vue.createApp({
+            data() {
+                return {
+                    //刚进入页面显示一句话
+                    msg: '稳住，我们能赢！！！！',
+                    //定时器
+                    interId: null
+                }
+            },
+            methods: {
+                //运动
+                handleRun() {
+                    this.interId = setInterval(()=> {
+                        //获取整个话的第一个字
+                        let start = this.msg.slice(0, 1)
+                        //console.log(start)
+                        //获取除第一个以外的所有字
+                        let end = this.msg.slice(1)
+                        //console.log(end);
+                        //连起来
+                        this.msg = end + start
+                    }, 500)
+                }
+
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

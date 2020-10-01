@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <input type="text"> -->
+        <!-- v-bind 属性绑定 在input中，data中的数据影响input中的数据，但input中的数据不会影响到data中的的数据-->
+        <!-- v-model 双向数据绑定 data中的数据影响input中的数据，而且input中的数据也会影响带data中的数据  v-model是一个语法糖  v-bind和oninput事件 -->
+        <!-- <input type="text" v-bind:value="msg"> -->
+        <input type="text" v-model="msg">
+        <p>{{msg}}</p>
+    </div>
+
+    <script src="../9-28/lib/vue-3.0.js"></script>
+
+    <script>
+        let vm=Vue.createApp({
+            //初始化数据
+            data(){
+                return{
+                    msg:'张三的娃娃叫李四'
+                }
+            },
+            //该组件所用方法
+            methods:{}
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

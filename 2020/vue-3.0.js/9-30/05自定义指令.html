@@ -25,13 +25,13 @@ directive 指令 mounted挂载
     <div id="app">
         <!-- 注意：vue中的自定义指令必须是以V-开头的 -->
         <!-- 传值 ，传msg  传的是一个对象-->
-        <input type="text" v-color='msg'>
+        <input type="text" v-color="msg">
     </div>
 
     <script src="../9-28/lib/vue-3.0.js"></script>
 
     <script>
-        //vm是view model 也叫vue实例 自定义指令在vm上挂载
+        //vm是view model 也叫vue实例 
         let vm = Vue.createApp({
             data(){
                 return{
@@ -41,6 +41,7 @@ directive 指令 mounted挂载
                 }
             }
         })
+        //自定义指令在vm上挂载
         vm.directive('color',{
             //mounted在挂载绑定元素的父组件时调用
             //binding  在此处是一个对象，对象里面有value值 vlue值中包含 color:'green'
