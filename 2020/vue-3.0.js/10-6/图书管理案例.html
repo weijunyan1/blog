@@ -152,17 +152,17 @@
           //如果id的那个input能用代表是添加，如果不能用是修改
           //所以要判断flag的值是true还是false
           if (this.flag == true) {
-            let that=this;
+            let that = this;
             //5.7获取到是那个对象的数据改变了
-            let index=this.books.findIndex(function(item){
-              return item.id==that.id
+            let index = this.books.findIndex(function (item) {
+              return item.id == that.id
             })
             //5.8设置那个对象的新name
-            this.books[index].name=this.name;
+            this.books[index].name = this.name;
             //5.9将修改后的编辑框和书名框进行清除
             this.id = "";
             this.name = ""
-            this.flag=false;
+            this.flag = false;
           } else {
             //在可以用的地方从新将添加写进去
 
@@ -210,7 +210,14 @@
           //5.5提交按钮，当前面的编辑可写的时候为添加，不可写的时候为修改，所以要在添加的
           //地方要在添加一个判断
 
+        },
+
+
+        // updated当数据有变化 就会执行  只要数据有变化 就把数据更新到localStorage中
+        updated() {
+          localStorage.setItem('books', JSON.stringify(this.books));
         }
+
 
       }
     }).mount('#app')

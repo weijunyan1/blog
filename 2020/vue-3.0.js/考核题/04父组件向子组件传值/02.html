@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .father {
+            width: 400px;
+            height: 400px;
+            border: 4px solid pink;
+        }
+
+        .son {
+            width: 200px;
+            height: 200px;
+            border: 4px solid yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <father></father>
+    </div>
+
+    <script src="../lib/vue-3.0.js"></script>
+
+
+
+    <script>
+        //根组件
+        let vm = Vue.createApp({})
+
+        //父组件
+        vm.component('father', {
+            data() {
+                return {
+                    msg: '你好啊',
+                    info: '我是父组件哒'
+                }
+            },
+
+            //服组件在html中的模板
+            //并在son组件中添加arr1,arr2等属性
+            template: `
+             <div class="father">
+             <h3>父组件</h3>
+             <son :arr1="msg" :arr2="info"></son>
+             </div>
+            `
+
+        })
+
+
+        //子组件
+        vm.component('son', {
+            data() {
+                return {}
+            },
+            //通过props将在父组件中定义好的属性声明一下子
+            props: ['arr1', 'arr2'],
+            //写son的模板
+            template: `
+            <div class="son">
+            <h3>子组件</h3>
+            {{arr1}}----{{arr2}}
+            </div>
+            `
+        })
+
+
+        vm.mount('#app')
+    </script>
+</body>
+
+</html>
