@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-html渲染标签</title>
+</head>
+<body>
+    <!-- 写模板V -->
+    <div>{{mag}}</div>
+    <!-- vue 是一个渐进式框架，一个页面中可以更具所需添加vue
+    在id为app的div中任何代码都是由vae来控制的
+    {{}}插值表达式 -->
+
+
+    <div id="app">
+        <h1>{{msg}}</h1>
+        不能解析标签和插值表达式的作用是一样的，但插值表达式会出现安全问题，但v-text不会出现安全问题
+        <h1 v-text="msg"></h1>
+        v-html可以解析标签并且可以规避xssr的攻击
+        <h1 v-html="msg"></h1>
+
+    </div>
+
+
+<!-- 引入vue库文件 -->
+<script src="./lib/vue-3.0.js"></script>
+
+
+<script>
+    //写数据(M)
+    let vm=Vue.createApp({
+        //写数据
+        data(){
+            //页面中所以数据都写在这里
+            return{
+                msg:'<p>你好我的p标签中的内容</p>'
+            }
+        }
+    })
+
+
+    //写控制器(vm)
+    //mount代表把模板和数据渲染 成一个有数据的html插入到那个元素中
+    vm.mount('#app');
+</script>
+
+</body>
+</html>

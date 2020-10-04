@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-bind为属性动态绑定值</title>
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 写模板V -->
+    <div>{{msg}}</div>
+    <div id="app">
+        <a v-bind:title="title" :class="red1" :href="link">  repellat inventore</a>
+       
+    </div>
+
+
+    <!-- 引入vue文库 -->
+    <script src="../9-28/lib/vue-3.0.js"></script>
+    <script>
+        console.log(window);
+    </script>
+
+
+
+
+    <script>
+        //写入数据(M)
+        let vm=Vue.createApp({
+            //存入你想要的数据
+            data(){
+                return{
+                    title:'文字',
+                    red1:'red',
+                    link:'http://www.baidu.com'
+                }
+            }
+        })
+
+        //写入控制器
+        vm.mount('#app')
+    </script>
+
+
+
+</body>
+
+</html>
