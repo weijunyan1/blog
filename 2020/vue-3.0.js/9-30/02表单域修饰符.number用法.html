@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单域修饰符的用法</title>
+</head>
+
+<body>
+    <!-- number 转化为数值
+    如果想自动将用户输入的值转为数值类型可以给v-model添加number修饰符 -->
+
+    <div id="app">
+        <!-- 1. -->
+        <!-- <input type="text" id="age" v-model="age"> -->
+        <!-- 2. -->
+        <input type="text" id="age" v-model.number="age">
+        <button @click="handleInput">点击</button>
+    </div>
+
+
+    <script src="../9-28/lib/vue-3.0.js"></script>
+
+
+    <script>
+        let app = Vue.createApp({
+            data() {
+                return {
+                    age: ''
+                }
+            },
+
+            methods: {
+                handleInput() {
+                    console.log(this.age + 1)
+                    //1此处属于字符串的拼接 
+                    //2.这时就可以算正真的加法啦
+                    //但是哦
+                    //要注意啦，此处添加.number只能对一种类型有效果，就是当输入的字符串
+                    //里面是数字的情况下，如果里面是文字的话，所表现的还是字符串的拼接
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

@@ -1,11 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>vue中绑定事件的机制</title>
 </head>
+
 <body>
-    
+    <!-- 模板V -->
+    <div>{{msg}}</div>
+    <div id="app">
+        <!-- 在p标签添加一个点击事件，弹出一个弹出框 -->
+        <p v-on:click="handleClick" v-on:dblclick="handleblClick('小明')" @mouseenter="handelMouseenter">{{content}}</p>
+    </div>
+
+    <!-- 引入vue库文件 -->
+    <script src="../9-28/lib/vue-3.0.js"></script>
+
+    <script>
+        //写数据
+        let vm=Vue.createApp({
+            //存储数据
+            data(){
+              return{
+                  content:'点我康康',
+                  people:'小红果'
+              }
+            },
+
+
+            //将所有的自定义方法都写到这里
+            methods:{
+                //方法一
+                handleClick(){
+                    alert("我被点击了一下")
+                },
+                //方法二
+                handledblClick:function(name){
+                    alert('我被'+name+'点击了')
+                },
+                //方法三
+                handelMouseenter:function(){
+                    alert('我被'+this.people+'抚摸了一下')
+                }
+            }
+        })
+        vm.mount('#app')
+    </script>
 </body>
+
 </html>

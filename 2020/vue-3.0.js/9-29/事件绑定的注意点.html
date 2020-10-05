@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件绑定的注意点</title>
+</head>
+
+<body>
+    <!-- 模板V -->
+    <div id="app">
+        {{msg}}
+        <span @click="handleClick('小明')">点我康康</span>
+    </div>
+
+    <!-- 导入vue库文件 -->
+    <script src="../9-28/lib/vue-3.0.js"></script>
+
+    <script>
+        //使用vue实例对象的createApp方法来创建应用实例获得数据和模板的绑定
+        let vm = Vue.createApp({
+            //存储数据M
+            data() {
+                return{
+                    mag:'永乐',
+                    count:1
+                }
+            },
+
+            //方法
+            methods:{
+                handleClick:function(name){
+                    this.count++;
+                    alert(name+"="+this.count)
+                }
+            }
+        })
+        vm.mount('#app')
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跑马灯</title>
+</head>
+<body>
+    <div id='app'>
+        <button @click="handleRun">浪起来</button>
+        <button @click="handleStop">消停会儿</button>
+        <h3>{{msg}}</h3>
+    </div>
+
+
+    <script src="../9-28/lib/vue-3.0.js"></script>
+
+
+    <script>
+        let vm=Vue.createApp({
+            data(){
+                return{
+                    //刚刚进入页面显示的第一句话
+                   msg:'稳住我们能赢！！！！',
+                   //定时器id
+                   interId:null
+                }
+            },
+
+
+            methods:{
+                //运动
+                handleRun(){
+                    //判断定时器的id是否为null
+                    if(this.interId!=null) return
+                    //开启定时器
+                    this.interId=setInterval(()=>{
+                        let start=this.msg.slice(0,1);
+                        let end=this.msg.slice(1)
+                        this.msg=end+start
+                    },500)
+                },
+
+
+                //停止
+                handleStop(){
+                    
+                }
+
+            }
+        })
+    </script>
+</body>
+</html>

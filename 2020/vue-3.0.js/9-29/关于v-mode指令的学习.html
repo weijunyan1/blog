@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于v-model的学习</title>
+</head>
+<body>
+    <div id=app>
+        <h3>{{msg}}</h3>
+        <input type="text" :value="msg">
+        <hr>
+        <input type="text" v-model="msg">
+        <hr>
+        <button @click="changeMsg">点击修改msg</button>
+    </div>
+
+    <script src="../9-28/lib/vue-3.0.js"></script>
+
+    <script>
+        //创建vue实例
+        var vm=Vue({
+            el:'#app',
+            data:{
+                msg:'最喜欢吃的菜：酸菜鱼'
+            },
+
+            methods:{
+                changeMsg(){
+                    this.msg="清蒸鱼"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

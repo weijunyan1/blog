@@ -1,0 +1,59 @@
+<!-- 简介
+除了核心功能默认内置是指令（v-model和v-show）Vue也允许注册自定义指令
+原因：应为在某些情况下，你仍需要对普通的DOM元素进行底层操作，这时就需要用到自定义指令 -->
+
+<!-- 
+    全局自定义指令语法
+vm.directive('指令名字',{
+mounted(){
+//功能
+}
+})
+directive 指令 mounted挂载
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义指令</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- 注意：vue中的自定义指令必须是以V-开头的 -->
+        <!-- 传值 ，传msg  传的是一个对象-->
+        <input type="text" v-color='msg'>
+    </div>
+
+    <script src="../9-28/lib/vue-3.0.js"></script>
+
+    <script>
+        //vm是view model 也叫vue实例 自定义指令在vm上挂载
+        let vm = Vue.createApp({
+            data(){
+                return{
+                    msg:{
+                        color:'green'
+                    }
+                }
+            }
+        })
+        vm.directive('color',{
+            //mounted在挂载绑定元素的父组件时调用
+            //binding  在此处是一个对象，对象里面有value值 vlue值中包含 color:'green'
+            mounted(el,binding){
+                console.log(binding.value.color)
+                //el代表使用指令的那个元素
+                el.value="你好"
+                //让input元素设置一个样式
+                el.style.backgroundColor=binding.value.color
+            }
+        })
+        vm.mount('#app')
+    </script>
+</body>
+
+</html>
