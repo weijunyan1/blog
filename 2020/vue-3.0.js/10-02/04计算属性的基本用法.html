@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 此处通过值的输入进行实时的计算-->
+<body>
+    <div id="app">
+        <input type="number"  v-model.number="num1">
+        <span>+</span>
+        <input type="number"  v-model.number="num2">
+        <button @click="handle">=</button>
+        <!-- disabled  禁止输入-->
+        <input type="text" disabled v-model="result">
+        <input type="text" disabled v-bind:value="getSum()">
+      
+    </div>
+<!-- 计算到视图需要用到v-bind -->
+<!-- 视图到计算需要用到的是v-model -->
+    <script src="../9-28/lib/vue-3.0.js"></script>
+
+    <script>
+        //先写vm并挂载到app上
+        let vm = Vue.createApp({
+            //存储数据的结构
+            data() {
+                return {
+                
+                }
+            },
+
+            //声明方法的结构
+            methods: {
+                getSum:function(){
+                    return this.num1+this.num2
+                }
+            },
+
+            //computed  计算属性
+            //计算属性是基于他们是响应式依赖进行缓存的
+            computed:{
+                result:function(){
+                    // let sum=num1+num2
+                    // return sum
+                    return this.num1+this.num2;
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

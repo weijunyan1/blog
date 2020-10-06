@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model.trim="fName">
+        <button @click="handleAdd">添加</button>
+        <buttin>删除</buttin>
+        <buttin>替换</buttin>
+        <ul>
+            <li>apple</li>
+        </ul>
+    </div>
+
+    <script src="../9-28/lib/vue-3.0.js"></script>
+
+    <script>
+       let vm = Vue.createApp({
+            //数据
+            data() {
+                return {
+                    //水果列表
+                    aFruit:['apple','orange','banana','lemon'],
+                    //水果名称
+                    fName:''
+                }
+            },
+
+            //方法
+            methods: {
+                //添加方法
+                handleApp(){
+                    //判断它是否为空
+                    if(this.fName){
+                        this.aFruit.push(this.fName)
+                    }else{
+                        alert('请添加内容')
+                    }
+                    this.fName=" "
+                }
+            },
+
+            //计算属性
+            computed: {
+
+            },
+
+            //侦听器
+            watch: {
+        
+
+            }
+        }).mount('#app')
+
+    </script>
+</body>
+</html>

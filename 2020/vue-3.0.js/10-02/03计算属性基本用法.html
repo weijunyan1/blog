@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Document</title>
 </head>
-
+<!-- 此处通过值的输入进行实时的计算-->
 <body>
     <div id="app">
-        <input type="number" class="num1" v-model="num1">
+        <input type="number"  v-model.number="num1">
         <span>+</span>
-        <input type="number" class="num2" v-model="num2">
-        <button @click="getSum">=</button>
+        <input type="number"  v-model.number="num2">
+        <button @click="handle">=</button>
         <!-- disabled  禁止输入-->
-        <input type="text" disabled class="sum" v-bind:value="sum">
+        <input type="text" disabled v-model="result">
+      
     </div>
 
     <script src="../9-28/lib/vue-3.0.js"></script>
@@ -25,19 +26,21 @@
             //存储数据的结构
             data() {
                 return {
-                    //声明数据
-                    num1:'',
-                    num2:'',
-                    sum:''
+                
                 }
             },
 
             //声明方法的结构
             methods: {
-                //计算加法结果
-                getSun(){
-                    //为了避免字符串的拼接，所以要通过parseFloat进行数据类型的转换
-                    this.sum=parseFloat(this.num1)+parseFloat(this.num2)
+            },
+
+            //computed  计算属性
+            //计算属性是基于他们是响应式依赖进行缓存的
+            computed:{
+                result:function(){
+                    // let sum=num1+num2
+                    // return sum
+                    return this.num1+this.num2;
                 }
             }
         }).mount('#app')

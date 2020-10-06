@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性之setter</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="firstName">
+        <input type="text" v-model="lastName">
+        <input type="text" v-model="fullName">
+    </div>
+
+    <script src="../9-28/lib/vue-3.0.js"></script>
+
+    <script>
+        let vm=Vue.createApp({
+            data(){
+                return{
+                    firstName:"",
+                    lastName:""
+                }
+            },
+
+            computed:{
+                //这样写可以达到响应的目的，但是计算属性中默认的只有getter，其中在你需要的=时候也会提供一个setter
+                // fullName:function(){
+                //     return this.firstName+" "+this.lastName
+                // }
+
+                //具体使用如下
+                //getter方法
+                fullName:{
+                    get:function(){
+                        return this.firstName+" "+this.lastName
+                    }
+                },
+                //setter设置方法
+                set(val){
+                    //使用空格进行分割、
+                    let arr=val.split(' ')
+                    this.firstName=arr[0]
+                    this.lastName=arr[1]
+                }
+
+
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>    
