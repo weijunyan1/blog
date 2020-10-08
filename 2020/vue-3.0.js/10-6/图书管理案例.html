@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .grid {
+      margin: auto;
+      width: 530px;
+      text-align: center;
+    }
+
+    .grid table {
+      border-top: 1px solid #C2D89A;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .grid th,
+    td {
+      padding: 10;
+      border: 1px dashed orange;
+      height: 35px;
+      line-height: 35px;
+    }
+
+    .grid th {
+      background-color: orange;
+    }
+
+    .grid .book {
+      padding-bottom: 10px;
+      padding-top: 5px;
+      background-color: orange;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="grid">
+      <div>
+        <h1>图书管理</h1>
+        <div class="book">
+          <div>
+            <label for="id">
+              编号：
+              <!-- 3.3进行绑定 -->
+            </label>
+            <!-- 5.2当点击编辑后无法进行输入 -->
+            <input type="text" id="id" v-model="id" :disabled="flag">
+            <label for="name">
+              名称：
+              <!-- 3.3进行绑定 -->
+            </label>
+            <input type="text" id="name" v-model="name">
+            <!-- 3.3进行绑定 -->
+            <button @click="handleAdd">提交</button>
+          </div>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>名称</th>
+            <th>时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- ///////然后将数据遍历到td中 -->
+          <!-- 2.1 -->
+          <!-- item代表的是数据，index代表的是下标（索引） -->
+          <!-- item.id就是对应数据的id值 -->
+          <tr v-for="(item,index) in books" :key="item.id">
+            <!-- 2.2 -->
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.date}}</td>
+            <td>
+              <a href="" @click.prevent="handleEdit(item.id)">修改</a>
+              <span>|</span>
+              <!-- 4.2给删除添加点击事件 -->
+              <a href="" @click.prevent="handleDel(index)">删除</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <script src="../9-28/lib/vue-3.0.js"></script>
+
+  <script>
+    let vm = Vue.createApp({
+      //////把获取值赋值个return
+      data() {
+        //2渲染books
+        return {
+          //5.1当点击编辑后编号框无法进行输入
+          //fals能用true不能用
+          flag: false,
+          //3添加
+          //3.1（构建编号和书名）
+          id: "",
+          name: "",
+          books: ''
+        }
+      },
+      ///////获取
+      //1当页面打开，我们要获取数据，数据在localStorage中
+      //使用生命周期函数获取数据
+      created() {
+        //1.1获取localStorage中的数据
+        //let aLast=localStorage.getItem('books')
+        //console.log(aLast)注意此处获得的是字符串，需要将字符串该为数组
+        //let aLast=JSON.parse(localStorage.getItem('books'))
+        //1.2但是此处如果没有数据的话，会显示null,但是最好将其改为空数组
+        //let aLast=JSON.parse(localStorage.getItem('books')||'[]')
+        //1.3将aLast赋值给books
+        this.books = JSON.parse(localStorage.getItem('books') || '[]')
+      },
+
+
+      methods: {
+
+        handleAdd() {
+          // //3.2写添加的方法
+          // //思路
+          // //获取编号
+          // //获取到名称
+          // //组成新的对象
+          // //把对象放到books里面
+          // this.books.push({
+          //   id: new Date().valueOf(),
+          //   name: this.name,
+          //   date: new Date().toLocaleString()
+          // })
+          // //把localStorage中的数据进行更新
+          // ////////////////////////转 JSON
+          // localStorage.setItem('books', JSON.stringify(this.books))
+          // //清空输入框
+          // this.id = "";
+          // this.name = ""
+
+          //5.6
+          //如果id的那个input能用代表是添加，如果不能用是修改
+          //所以要判断flag的值是true还是false
+          if (this.flag == true) {
+            let that=this;
+            //5.7获取到是那个对象的数据改变了
+            let index=this.books.findIndex(function(item){
+              return item.id==that.id
+            })
+            //5.8设置那个对象的新name
+            this.books[index].name=this.name;
+            //5.9将修改后的编辑框和书名框进行清除
+            this.id = "";
+            this.name = ""
+            this.flag=false;
+          } else {
+            //在可以用的地方从新将添加写进去
+
+            //3.2写添加的方法
+            //思路
+            //获取编号
+            //获取到名称
+            //组成新的对象
+            //把对象放到books里面
+            this.books.push({
+              id: new Date().valueOf(),
+              name: this.name,
+              date: new Date().toLocaleString()
+            })
+            //把localStorage中的数据进行更新
+            ////////////////////////转 JSON
+            localStorage.setItem('books', JSON.stringify(this.books))
+            //清空输入框
+            this.id = "";
+            this.name = ""
+
+          }
+
+
+        },
+
+
+        //4.删除图书
+        //4.1创建删除图书的方法
+        handleDel(index) {
+          this.books.splice(index, 1)
+        },
+
+
+        //5.修改图书
+        handleEdit(id) {
+          //当点击后就为true不能用
+          //5.3id的输入框不能进行输入
+          this.flag = true
+          //5.4找到点击的id将内容拿出来(及点击编辑的时候要获取到id对应的内容【id,name】)
+          let arr = this.books.filter(item => item.id == id)
+          console.log(arr)
+          this.id = arr[0].id;
+          this.name = arr[0].name
+          //5.5提交按钮，当前面的编辑可写的时候为添加，不可写的时候为修改，所以要在添加的
+          //地方要在添加一个判断
+
+        }
+
+      }
+    }).mount('#app')
+  </script>
+
+</body>
+
+</html>

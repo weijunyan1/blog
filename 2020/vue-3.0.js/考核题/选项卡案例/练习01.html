@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .tab ul {
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tab ul li {
+            box-sizing: border-box;
+            padding: 0;
+            float: left;
+            width: 100px;
+            height: 45px;
+            line-height: 45px;
+            list-style: none;
+            text-align: center;
+            border-top: 1px solid blue;
+            border-right: 1px solid blue;
+            cursor: pointer;
+        }
+
+        .tab ul li:first-child {
+            border-left: 1px solid blue;
+        }
+
+        /* 被选中的标题 */
+        .tab ul li.active {
+            background-color: orange;
+        }
+
+        .tab div {
+            width: 500px;
+            height: 300px;
+            display: none;
+            text-align: center;
+            font-size: 30px;
+            line-height: 300px;
+            border: 1px solid blue;
+            border-top: 0px;
+        }
+
+        /* 被选中的图片 */
+        .tab div.current {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1.写模板 -->
+    <!-- 2记得添加class -->
+    <div id="app">
+        <div class="tab">
+            <ul>
+                <!-- 6渲染li -->
+                <!-- <li class="active">拉拉</li> -->
+                <!-- 8判断索引是否为0，如果为0添加active属性 -->
+
+                <li v-for="(item,index) in aList" :key="item.id" :class="index == currentIndex?'active':'' "  @click="   handleClick(index)">{{item.title}}</li>
+                <!-- 这个是页面渲染啊，v-for等同于for循环，item和index是传的两个参数，item是单个数据，index是索引 -->
+            </ul>
+
+            <div v-for="(item,index) in aList" :key="item.id" :class="index==currentIndex?'current':''">
+                <img :src="item.imgSrc" alt="">
+            </div>
+        </div>
+    </div>
+
+    <!-- 3.引入vue -->
+    <script src="../lib/vue-3.0.js"></script>
+
+    <!-- 4.写基本结构 -->
+    <script>
+        let vm = Vue.createApp({
+            //获取数据
+            data() {
+
+                return {
+
+                    //7当索引为0的时候要将部分内容进行展示
+                    currentIndex: 0,
+
+                    //5.写需要渲染的数据
+                    aList: [{
+                            id: 1,
+                            title: '啦啦',
+                            imgSrc: '../图片/01.gif',
+                            font: '小白兔'
+                        },
+                        {
+                            id: 1,
+                            title: '开心',
+                            imgSrc: '../图片/02.gif',
+                            font: '小白兔'
+                        },
+                        {
+                            id: 1,
+                            title: '哭泣',
+                            imgSrc: '../图片/03.gif',
+                            font: '小白兔'
+                        }
+
+                    ]
+                }
+            },
+
+            //方法
+            //9接收下标进行图片的改变
+            methods: {
+                handleClick(index){
+                    this.currentIndex=index
+                }
+            }
+
+
+
+
+
+
+
+        }).mount('#app')
+    </script>
+
+</body>
+
+</html>

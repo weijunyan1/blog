@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: npne;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div>{{mag}}</div>
+    <!-- 写模板（v）
+    vue是一个渐进式框架，一个页面中不需要vue的地方可以不用需要vue的地方在用
+    在id为app的div中任何代码都是由vue来控制的
+    {{}}的名称为插值表达式 -->
+
+    <div id='app'>
+        <p v-cloak>
+            {{msg}}
+        </p>
+    </div>
+
+
+    <!-- 引入vue库文件
+    当页面中引入vue库文件，那么全局对象windo中就有了一个vue的实例对象 -->
+    <script src="../lib/vue-3.0.js"></script>
+    <script>
+        console.log(window)
+    </script>
+
+    <script>
+        //写数据
+        let vm=Vue.createApp({
+            //存数据
+            data(){
+                return{
+                    //所有页面中的数据都在这里写
+                    msg:'<p>你好，我是p标签的内容</p>'
+
+                }
+            }
+        })
+        // 写控制器
+        // mount()代表把模板和数据渲染成一个有数据的html插入到那个元素中
+        vm.mount('#app')
+
+    </script>
+
+
+
+</body>
+
+</html>
