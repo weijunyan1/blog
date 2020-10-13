@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    span {
+      display: inline-block;
+      width: 33.333%;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+  </style>
+    
+</head>
+<body>
+
+    <div id="app">
+        <toubu>
+            <!-- 将此处的template渲染到 left插槽中-->
+         <!-- 注意匿名插槽的名字为default -->
+           <template v-slot="default">
+           <button>我是匿名插槽</button>
+           </template>
+        </toubu>
+      </div>
+
+
+<script src="../考核题/lib/vue-3.0.0.js"></script>
+
+<script>
+    //父组件
+    let vm = Vue.createApp({});
+
+    //子组件
+    vm.component('toubu', {
+      template: `
+        <header>
+        <!--没有名字： 匿名插槽   有名字：具名插槽 -->
+  
+         <slot></slot>
+         <!-- 当插槽中有默认内容，且不对它进行渲染的话，默认内容的不会变的
+         但是，如果要对其进行渲染的话，所渲染内容回覆盖原有的默认内容
+          -->
+
+
+        </header>
+      `
+    });
+    vm.mount('#app');
+
+</script>
+
+
+</body>
+</html>

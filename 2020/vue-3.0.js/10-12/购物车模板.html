@@ -105,27 +105,13 @@
         3.实现商品的删除
         4.实现商品更具商品数量结算总价
      -->
-
-     <div id="app">
-
-
-         <div class="container">
-            <cart></cart>
-         </div>
-     </div>
-
-     <script src="../考核题/lib/vue-3.0.0.js"></script>
-
-     <script>
-         //1创建vue实例(跟组件)
-         let vm=Vue.createApp({});
-         //6.写购物车头部组件
-         let cartTitle={
-             template:` <div class="title">我的商品</div>`
-         };
-         //写购物车列表组件
-         let cartList={
-             template:`    <div>
+  <div id="app">
+    <div class="container">
+      <div class="cart">
+        <!-- title -->
+        <div class="title">我的商品</div>
+        <!-- 列表 -->
+        <div>
           <div class="item">
             <img src="img/a.jpg" />
             <div class="name"></div>
@@ -136,47 +122,55 @@
             </div>
             <div class="del">×</div>
           </div>
-        
-        
-       
-        
-        </div>`
-         };
-         //写购物车结算组件
-         let cartTotal={
-            template:`<div class="total">
+          <div class="item">
+            <img src="img/b.jpg" />
+            <div class="name"></div>
+            <div class="change">
+              <a href="">－</a>
+              <input type="text" class="num" />
+              <a href="">＋</a>
+            </div>
+            <div class="del">×</div>
+          </div>
+          <div class="item">
+            <img src="img/c.jpg" />
+            <div class="name"></div>
+            <div class="change">
+              <a href="">－</a>
+              <input type="text" class="num" />
+              <a href="">＋</a>
+            </div>
+            <div class="del">×</div>
+          </div>
+          <div class="item">
+            <img src="img/d.jpg" />
+            <div class="name"></div>
+            <div class="change">
+              <a href="">－</a>
+              <input type="text" class="num" />
+              <a href="">＋</a>
+            </div>
+            <div class="del">×</div>
+          </div>
+          <div class="item">
+            <img src="img/e.jpg" />
+            <div class="name"></div>
+            <div class="change">
+              <a href="">－</a>
+              <input type="text" class="num" />
+              <a href="">＋</a>
+            </div>
+            <div class="del">×</div>
+          </div>
+        </div>
+        <!-- 总价 -->
+        <div class="total">
           <span>总价：123</span>
           <button>结算</button>
-        </div>`
-
-         }
-
-         //2创建购物车组件(父组件)
-         vm.component('cart',{
-             //4写模板
-             template:`
-             <div class="cart">
-                <CartTitle></CartTitle>
-                <CartList></CartList>
-                <CartTotal></CartTotal>
-             </div>
-             `,
-
-
-             //5写子组件
-             
-             components:{
-                 "CartTitle":'cartTitle',
-                 "CartList":'cartList',
-                 "CartTotal":'cartTotal',
-             }
-         })
-
-         //3挂载实例
-         vm.mount('#app')
-
-
-     </script>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 
