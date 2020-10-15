@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .grid {
+      margin: auto;
+      width: 530px;
+      text-align: center;
+    }
+
+    .grid table {
+      border-top: 1px solid #C2D89A;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .grid th,
+    td {
+      padding: 10;
+      border: 1px dashed orange;
+      height: 35px;
+      line-height: 35px;
+    }
+
+    .grid th {
+      background-color: orange;
+    }
+
+    .grid .book {
+      padding-bottom: 10px;
+      padding-top: 5px;
+      background-color: orange;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="grid">
+      <div>
+        <h1>图书管理</h1>
+        <div class="book">
+          <div>
+            <label for="id">
+              编号：
+            </label>
+            <!-- 双向绑定  并定义flage -->
+            <input type="text" id="id" v-move="id"  :disabled="flag"> 
+            <label for="name">
+              名称：
+            </label>
+            <!-- 双向绑定 -->
+            <input type="text" id="name"  v-move="name">
+            <!-- 给提交添加点击事件  并定义加addflag -->
+            <button @click="handleAdd"  :disabled="addflag">提交</button>
+          </div>
+        </div>
+        <div> 有 {{many}} 本书 </div>
+      </div> 
+      <table>
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>名称</th>
+            <th>时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr >
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.date}}</td>
+            <td>
+                <!-- 给修改添加点击事件 -->
+           <a href="" @click="handleEdit">修改</a>
+              <span>|</span>
+              <!-- 给删除添加点击事件 -->
+              <a href="" @click="handleDle">删除</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="./lib/vue-3.0.0.js"></script>
+  <script src="./lib/axios.js"></script>
+  <script>
+   //接口
+   axios.defaults.baseURL="http://localhost:3000"
+   //挂载vue实例
+   let vm=Vue.createApp({
+       //数据
+       data(){
+           return{
+            flag:false,
+            addflag:false,
+            id:'',
+            name:'',
+            books:''
+           }
+       },
+
+       //刷新
+       created(){
+
+       },
+
+
+       //方法
+       methods:{
+           //渲染
+           async handleStarch(){
+               let src=await axios.get('books')
+               this.books=src.data
+           },
+
+
+
+           //添加图书，修改图书
+           async handleAdd(){
+               if(this.flag){
+                let src=await axios.put("books",{
+                       name=this.name
+                   });
+                   if(src.data.status==200){
+                       this.handleStarch()
+                       this.id=""
+                       this.name=""
+                   }
+               }else{
+                   let src=await axios.post("books",{
+                       name=this.name
+                   });
+                   if(src.data.status==200){
+                       this.handleStarch()
+                       this.id=""
+                       this.name=""
+                   }
+
+                   
+               }
+           },
+
+
+
+
+           //删除图书
+           async handleDle(){
+               let src=await axios.delete(`books/${id}`)
+               this.handleStarch()
+           },
+
+
+
+
+           //修改图书
+           async handleEdit(){
+            let src=await axios.put(`books/${id}`)
+            this.id=src.data.id
+            this.name=src.data.name
+           }
+
+
+
+       },
+
+
+
+
+       //监听
+       watch:{
+         async  name(){
+             let src=await axios.get(`books/books/${this.name}`)
+             if(src.data.status==1){
+                addflag==true
+             }else{
+                 addflag==false
+             }
+        }
+
+       },
+
+
+
+
+       //计算
+       computed:{
+           many(){
+               let num=this.books.length
+               return num
+           }
+       }
+
+   }).mount('#app')
+  </script>
+</body>
+
+</html>
