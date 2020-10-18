@@ -12,7 +12,7 @@ router.post('/books',service.addBook);
 // 跳转到编辑图书信息页面
 router.get('/books/:id',service.toEditBook);
 // router.get('/toEditBook',service.toEditBook);
-// 修改                                                                                                                                                                                                                                                                                                     图书提交表单
+// 编辑图书提交表单
 router.put('/books/:id',service.editBook);
 // 删除图书信息
 router.delete('/books/:id',service.deleteBook);

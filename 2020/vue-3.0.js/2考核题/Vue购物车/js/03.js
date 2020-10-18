@@ -1,68 +1,25 @@
-//1创建vue实例
-let vm = Vue.createApp({})
+//创建vue实例并挂载
+let vm=Vue.createApp({})
 
 
-//设置头部组件
+
+//设置头部子组件
 let carttitle={
-    //接收父组件的传值
+    //设置接收父组件的传参
     props:['uname'],
-    //创建子组件的模板
+    //创建模板
     template:`
-    <div class="title">{{uname}}的商品</div>
+    
     `
+
 }
 
-
-//设置中间列表组件
-let cartlist={
-    //接收父组件的传值
-    props:['list'],
-    //创建子组件模板
-    template:`
-    <div>
-    <!-- 因为中间要进行商品的增减所以-->
-          <div class="item" v-for="(item,index) in list"  :key="item.id">
-            <img :src="item.img">
-            <div class="name">{{item.name}}</div>
-            <div class="change">
-            <!--给加号添加点击事件-->
-              <a href="" @click.prevent="reduce(index)">－</a>
-              <input type="text" class="num" v-move="item.num">
-              <a href="" @click.prevent="plus(index)">＋</a>
-            </div>
-            <div class="del" @click="remove(index)">×</div>
-          </div>
-        </div>
-    `,
-
-    //创建方法
-    methods:{
-        plus(index){
-            this.$emit('changet')
-        }
-    }
-}
-
-
-//设置底部结算组件
-let carttotal={
-    //接收父组件的传值
-    props:['list'],
-    //创建子组件模板
-    template:`
-    <div class="total">
-    <span>总价：123</span>
-    <button>结算</button>
-  </div>
-    `
-}
-
-
-//3创建父组件
-vm.component('cart', {
-    //3。1添加数据
-    price() {
-        return {
+//1.创建跟组件
+vm.component('cart',{
+    //1.1添加数据
+    data(){
+        return{
+            uname: '张三',
             list: [{
                 id: 1,
                 name: 'TCL彩电',
@@ -98,29 +55,40 @@ vm.component('cart', {
     },
 
 
-    //3.2创建父组件模板，并在父组件模板中添加自定义事件便于将父组件的数据发送到子组件
-    template: `
-    <div>
-    <carttitle :uname='uname'></carttitle>
-    <cartlist :list='list' 2
     
-    ></cartlist>
-    <carttotal :list='list'></carttotal>
+    //1.2写模板
+    template:`
+    <div class="cart">
+         <carttitle :uname="uname"></carttitle>
+         <cartlist :list="list"></cartlist>
+         <carttotal :list="list"></carttotal>
     </div>
-    `
+    `,
 
 
-    //3.3在外部创建子组件，并使用props方法接父组件的数据
+    //1.3设置方法
+    methods:{
+        //创建父组件自定义事件
+        change(val){
+            //判断type的状态是否为加
+            if(val.type=='plus'){
+                this.list[val.index].num++
+            }else if(val.type=='reduce'){
+                this.list[val.index].num--
+            }else if(val.type=='remove'){
+                this.list.splice(val.index,1)
+            }
+        }
+    },
 
 
-
-    //3.4方法
-
-
-    //3.5设置子组件
-
+    //1.4设置组件
+    components:{
+        "carttitle":carttitle,
+        "cartlist":cartlist,
+        "carttotal":carttotal
+    }
 
 })
 
-//2.进行挂载
 vm.mount('#app')

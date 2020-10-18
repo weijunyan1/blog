@@ -53,8 +53,8 @@
             <label for="name">
               名称：
             </label>
-            <input type="text" id="name"  v-model="name" >
-            <button @click="headelApp" :disabled="addflag">提交</button>
+            <input type="text" id="name" v-model="name">
+            <button @click="handleAdd" :disabled="addflag">提交</button>
           </div>
           <div>图书共有 {{many}} 本 </div>
         </div>
@@ -70,11 +70,11 @@
         </thead>
         <tbody>
           <tr v-for="(item,index) in books" :key="item.id">
-            <td>{{item.id}}  </td>
+            <td> {{item.id}} </td>
             <td> {{item.name}} </td>
             <td> {{item.date}} </td>
             <td>
-              <a href="" @click.prevent="handleEach(item.id)">修改</a>
+              <a href="" @click.prevent="handleEdit(item.id)">修改</a>
               <span>|</span>
               <a href="" @click.prevent="handleDel(item.id)">删除</a>
             </td>
