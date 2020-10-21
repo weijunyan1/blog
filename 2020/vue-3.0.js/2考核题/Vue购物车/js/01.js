@@ -90,6 +90,11 @@ let carttotal = {
     }
 
 }
+import num1 form ''
+import num2 form ''
+import num3 form ''
+import num4 form ''
+import num5 form ''
 
 // 第一步，创建根组件
 vm.component('cart', {
