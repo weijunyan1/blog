@@ -46,16 +46,16 @@
         <h1>图书管理</h1>
         <div class="book">
           <div>
-            <label for="id">
+            <label for="id" v-model="" >
               编号：
             </label>
             <!-- 判断id输入框是否可以用 -->
-            <input type="text" id="id" v-model="id" :disabled="flag">
+            <input type="text" id="id" >
             <label for="name">
               名称：
             </label>
-            <input type="text" id="name" v-model="name">
-            <button @click="add">提交</button>
+            <input type="text" id="name" >
+            <button >提交</button>
           </div>
         </div>
       </div>
@@ -69,10 +69,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in books" :key="item.id">
-            <td>{{item.id}}</td>
-            <td>{{item.name}}</td>
-            <td>{{item.date}}</td>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
             <td>
               <a href="" >修改</a>
               <span>|</span>
@@ -85,52 +85,7 @@
   </div>
 <script src="../lib//vue-3.0.0.js"></script>
 <script>
-  let vm=Vue.createApp({
-    //数据
-    data(){
-      return{
-        books:'',
-        id:'',
-        name:'',
-        flag:false
 
-        
-      }
-    },
-
-    //判断books是否存在
-    created(){
-      this.books=JSON.parse(localStorage.getItem('books') || [])
-    },
-
-
-    
-    //事件
-    methods:{
-
-      add(){
-        if(this.flag){
-
-        }else{
-          if(!(this.name.trim()))return alert('不能为空')
-          this.books.push(
-            {
-              id:new Date().valueOf(),
-              name:this.name,
-              date:new Date().toLocaleDateString()
-            }
-          )
-        }
-        this.name=this.id = ''
-        this.flag = false
-      }
-    },
-        //如果数据更改后，同步信息
-     updated(){
-      localStorage.setItem('books',JSON.stringify(this.books))
-    }
-    
-  }).mount('#app')
 
 </script>
 </body>
