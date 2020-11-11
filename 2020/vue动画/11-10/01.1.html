@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 点击事件，用来更换active的状态 -->
+        <button @click="active =  !active">按钮</button>
+        <p v-if="active">我的内容</p>
+    </div>
+
+    <script src="./lib/vue-3.0.0.js"></script>
+    <script>
+        //定义一个vue实例绑定到app上
+        let app = Vur.createApp({
+            data(){
+                return{
+                    //定义active的
+                    active:true
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>

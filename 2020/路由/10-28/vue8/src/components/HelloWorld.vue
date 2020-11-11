@@ -1,28 +1,54 @@
 <template>
   <div class="hello">
-    <h3>我叫{{name}}，我今年{{age}}岁了</h3>
+    <h1 @click="arr">{{ firstname }}</h1>
+    <h2 @click="arr2"> asd </h2>
+   
   </div>
 </template>
 
 <script>
+import { mapState,mapMutations } from 'vuex';
 export default {
   name: "HelloWorld",
-  //计算属性
-  computed:{
-    //this.$store.state.属性名
-    name(){
-      return this.$store.state.nmae;
-      //return 
-    },
+  props: {
+    msg: String
+  },
 
-    age(){
-      return this.$store.state.age
+  data(){
+    return{
+      lastname:"想不想知道她是谁嘞"
     }
+  },
 
 
+  methods:{
+    ...mapMutations(['arr2','arr'])
+  },
+
+  computed:{
+    ...mapState(["firstname"])
   }
 };
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
